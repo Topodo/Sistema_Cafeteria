@@ -6,7 +6,7 @@
 package Classes;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,8 +44,8 @@ public class Deliverys implements Serializable {
     private Integer deliverysHour;
     @Column(name = "deliverys_available")
     private Short deliverysAvailable;
-    @ManyToMany(mappedBy = "deliverysCollection")
-    private Collection<Dates> datesCollection;
+    @ManyToMany(mappedBy = "deliverysList")
+    private List<Dates> datesList;
 
     public Deliverys() {
     }
@@ -79,12 +79,12 @@ public class Deliverys implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Dates> getDatesCollection() {
-        return datesCollection;
+    public List<Dates> getDatesList() {
+        return datesList;
     }
 
-    public void setDatesCollection(Collection<Dates> datesCollection) {
-        this.datesCollection = datesCollection;
+    public void setDatesList(List<Dates> datesList) {
+        this.datesList = datesList;
     }
 
     @Override

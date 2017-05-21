@@ -6,6 +6,7 @@
 package DesingPatterns;
 
 import Classes.Foods;
+import Classes.Users;
 import java.sql.Date;
 import java.util.List;
 
@@ -14,10 +15,9 @@ import java.util.List;
  * @author Ariel
  * Interfaz que define el comportamiento de la clase Foods y ProxyFoods
  */
-public interface FoodsMethods {
+public interface ProxyMethods {
     
     //Métodos abstractos
-    public List<Foods> comidasPorFecha(Date date);
-
-    
+    public List<Foods> comidas();
+    public List<Users> users();
 }

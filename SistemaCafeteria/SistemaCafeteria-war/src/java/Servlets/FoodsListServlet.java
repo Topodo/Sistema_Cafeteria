@@ -5,46 +5,20 @@
  */
 package Servlets;
 
-import Classes.Users;
-import DesingPatterns.Iterator;
-import DesingPatterns.Proxy;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import javafx.scene.control.Alert;
-import javafx.scene.web.WebEvent;
-import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.jasper.tagplugins.jstl.ForEach;
 
 /**
  *
  * @author cbzn_
  */
-public class LoginServlet extends HttpServlet {
-
-    @EJB
-    private Proxy proxy;
+public class FoodsListServlet extends HttpServlet {
+    
     int idUser;
-
-    //Método que verifica la existencia del usuario ingresado
-    public boolean checkUser(String user, String pass){
-        List<Users> users = proxy.users();
-        Users usuario; 
-        Iterator iterador = new Iterator(users);
-        while(iterador.hasNext()){
-            usuario = (Users)iterador.next();
-            if(usuario.getUsersName().equals(user) && usuario.getUsersPass().equals(pass)){
-                idUser = usuario.getIdUsers();
-                return true;
-            }
-        }
-        return false;
-    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -57,14 +31,8 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        if(checkUser(request.getParameter("user"), request.getParameter("pass"))){
-            request.setAttribute("idUser", idUser);
-            RequestDispatcher rd = request.getRequestDispatcher("FoodsListServlet");
-            rd.forward(request, response);
-        }
-        else{
-            response.sendRedirect("Login.jsf");
-        }
+        idUser = (int)request.getAttribute("idUser");
+        response.sendRedirect("FoodsList.jsf");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

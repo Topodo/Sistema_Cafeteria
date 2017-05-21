@@ -6,8 +6,8 @@
 package Classes;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,12 +51,12 @@ public class Dates implements Serializable {
         @JoinColumn(name = "dates_id_dates", referencedColumnName = "id_dates")}, inverseJoinColumns = {
         @JoinColumn(name = "deliverys_id_deliverys", referencedColumnName = "id_deliverys")})
     @ManyToMany
-    private Collection<Deliverys> deliverysCollection;
+    private List<Deliverys> deliverysList;
     @JoinTable(name = "users_has_dates", joinColumns = {
         @JoinColumn(name = "dates_id_dates", referencedColumnName = "id_dates")}, inverseJoinColumns = {
         @JoinColumn(name = "users_id_users", referencedColumnName = "id_users")})
     @ManyToMany
-    private Collection<Users> usersCollection;
+    private List<Users> usersList;
 
     public Dates() {
     }
@@ -82,21 +82,21 @@ public class Dates implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Deliverys> getDeliverysCollection() {
-        return deliverysCollection;
+    public List<Deliverys> getDeliverysList() {
+        return deliverysList;
     }
 
-    public void setDeliverysCollection(Collection<Deliverys> deliverysCollection) {
-        this.deliverysCollection = deliverysCollection;
+    public void setDeliverysList(List<Deliverys> deliverysList) {
+        this.deliverysList = deliverysList;
     }
 
     @XmlTransient
-    public Collection<Users> getUsersCollection() {
-        return usersCollection;
+    public List<Users> getUsersList() {
+        return usersList;
     }
 
-    public void setUsersCollection(Collection<Users> usersCollection) {
-        this.usersCollection = usersCollection;
+    public void setUsersList(List<Users> usersList) {
+        this.usersList = usersList;
     }
 
     @Override

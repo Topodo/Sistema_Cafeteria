@@ -6,8 +6,7 @@
 package Classes;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,9 +19,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -39,8 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Foods.findByIdFoods", query = "SELECT f FROM Foods f WHERE f.idFoods = :idFoods")
     , @NamedQuery(name = "Foods.findByFoodsName", query = "SELECT f FROM Foods f WHERE f.foodsName = :foodsName")
     , @NamedQuery(name = "Foods.findByFoodsStock", query = "SELECT f FROM Foods f WHERE f.foodsStock = :foodsStock")
-    , @NamedQuery(name = "Foods.findByFoodsPrice", query = "SELECT f FROM Foods f WHERE f.foodsPrice = :foodsPrice")
-    , @NamedQuery(name = "Foods.findByFoodsDate", query = "SELECT f FROM Foods f WHERE f.foodsDate = :foodsDate")})
+    , @NamedQuery(name = "Foods.findByFoodsPrice", query = "SELECT f FROM Foods f WHERE f.foodsPrice = :foodsPrice")})
 public class Foods implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,28 +52,18 @@ public class Foods implements Serializable {
     @Size(max = 45)
     @Column(name = "foods_price")
     private String foodsPrice;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "foods_date")
-    @Temporal(TemporalType.DATE)
-    private Date foodsDate;
     @JoinTable(name = "orders_has_foods", joinColumns = {
         @JoinColumn(name = "foods_id_foods", referencedColumnName = "id_foods")}, inverseJoinColumns = {
         @JoinColumn(name = "orders_id_orders", referencedColumnName = "id_orders")
         , @JoinColumn(name = "orders_menus_id_menus", referencedColumnName = "menus_id_menus")})
     @ManyToMany
-    private Collection<Orders> ordersCollection;
+    private List<Orders> ordersList;
 
     public Foods() {
     }
 
     public Foods(Integer idFoods) {
         this.idFoods = idFoods;
-    }
-
-    public Foods(Integer idFoods, Date foodsDate) {
-        this.idFoods = idFoods;
-        this.foodsDate = foodsDate;
     }
 
     public Integer getIdFoods() {
@@ -113,21 +98,13 @@ public class Foods implements Serializable {
         this.foodsPrice = foodsPrice;
     }
 
-    public Date getFoodsDate() {
-        return foodsDate;
-    }
-
-    public void setFoodsDate(Date foodsDate) {
-        this.foodsDate = foodsDate;
-    }
-
     @XmlTransient
-    public Collection<Orders> getOrdersCollection() {
-        return ordersCollection;
+    public List<Orders> getOrdersList() {
+        return ordersList;
     }
 
-    public void setOrdersCollection(Collection<Orders> ordersCollection) {
-        this.ordersCollection = ordersCollection;
+    public void setOrdersList(List<Orders> ordersList) {
+        this.ordersList = ordersList;
     }
 
     @Override

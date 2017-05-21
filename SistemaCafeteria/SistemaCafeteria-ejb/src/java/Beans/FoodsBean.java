@@ -6,7 +6,7 @@
 package Beans;
 
 import Classes.Foods;
-import DesingPatterns.FoodsMethods;
+import Classes.Users;
 import java.sql.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -14,6 +14,7 @@ import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import DesingPatterns.ProxyMethods;
 
 /**
  *
@@ -22,7 +23,7 @@ import javax.persistence.Query;
  */
 @Stateless
 @LocalBean
-public class FoodsBean implements FoodsMethods{
+public class FoodsBean implements ProxyMethods{
 
     @PersistenceContext(unitName = "SistemaCafeteria-ejbPU")
     private EntityManager em;
@@ -31,13 +32,17 @@ public class FoodsBean implements FoodsMethods{
         em.persist(object);
     }
 
-    //Método implementado desde la interfaz FoodsMethods, para la implementación del Proxy
+    //Método implementado desde la interfaz ProxyMethods, para la implementación del Proxy
 
     @Override
-    public List<Foods> comidasPorFecha(Date date) {
-        //Se realiza la query correspondiente
-        Query query = em.createNamedQuery("Foods.findByFoodsDate").setParameter("foodsDate", date);
+    public List<Foods> comidas() {
+        Query query = em.createNamedQuery("Foods.findAll");
         return query.getResultList();
+    }
+
+    @Override
+    public List<Users> users() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

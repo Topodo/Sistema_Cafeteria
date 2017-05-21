@@ -7,7 +7,6 @@ package web;
 
 import Beans.FoodsBean;
 import Classes.Foods;
-import DesingPatterns.FoodsMethods;
 import DesingPatterns.Proxy;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -15,6 +14,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 import javax.ejb.EJB;
+import DesingPatterns.ProxyMethods;
 
 /**
  *
@@ -36,9 +36,10 @@ public class FoodsService implements Serializable  {
     public FoodsService() {
     }
 
-    public List<Foods> comidasPorFecha() {
-        Date fecha = Date.valueOf("2017-05-25");
-        return proxy.comidasPorFecha(fecha);
+    
+    
+    public List<Foods> comidas() {
+        return proxy.comidas();
     }
     
     

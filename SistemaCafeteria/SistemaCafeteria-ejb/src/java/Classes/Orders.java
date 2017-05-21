@@ -6,7 +6,7 @@
 package Classes;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -44,10 +44,10 @@ public class Orders implements Serializable {
     @Size(max = 45)
     @Column(name = "orders_manager")
     private String ordersManager;
-    @ManyToMany(mappedBy = "ordersCollection")
-    private Collection<Foods> foodsCollection;
+    @ManyToMany(mappedBy = "ordersList")
+    private List<Foods> foodsList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orders")
-    private Collection<Users> usersCollection;
+    private List<Users> usersList;
 
     public Orders() {
     }
@@ -85,21 +85,21 @@ public class Orders implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Foods> getFoodsCollection() {
-        return foodsCollection;
+    public List<Foods> getFoodsList() {
+        return foodsList;
     }
 
-    public void setFoodsCollection(Collection<Foods> foodsCollection) {
-        this.foodsCollection = foodsCollection;
+    public void setFoodsList(List<Foods> foodsList) {
+        this.foodsList = foodsList;
     }
 
     @XmlTransient
-    public Collection<Users> getUsersCollection() {
-        return usersCollection;
+    public List<Users> getUsersList() {
+        return usersList;
     }
 
-    public void setUsersCollection(Collection<Users> usersCollection) {
-        this.usersCollection = usersCollection;
+    public void setUsersList(List<Users> usersList) {
+        this.usersList = usersList;
     }
 
     @Override

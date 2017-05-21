@@ -19,7 +19,7 @@ and open the template in the editor.
 
             <h:form>
                 <h1><h:outputText value="List"/></h1>
-                <h:dataTable value="#{foodsService.comidasPorFecha()}" var="item">
+                <h:dataTable value="#{foodsService.comidas()}" var="item">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="IdFoods"/>
@@ -44,17 +44,8 @@ and open the template in the editor.
                         </f:facet>
                         <h:outputText value="#{item.foodsPrice}"/>
                     </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="FoodsDate"/>
-                        </f:facet>
-                        <h:outputText value="#{item.foodsDate}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                    </h:column>
                 </h:dataTable>
             </h:form>
-        </f:view>
-
+        </f:view>  
     </h:body>
 </html>

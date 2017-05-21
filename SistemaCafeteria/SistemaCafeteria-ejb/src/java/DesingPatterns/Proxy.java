@@ -22,24 +22,21 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 @LocalBean
-public class Proxy implements FoodsMethods{
+public class Proxy implements ProxyMethods{
 
     @EJB
     private UsersBeans usersBeans;
 
     @EJB
     private FoodsBean foodsBean;
-
+    
     @Override
-    public List<Foods> comidasPorFecha(Date date) {
-        return foodsBean.comidasPorFecha(date);
-    }
-    
-    
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
-
     public List<Users> users() {
         return usersBeans.users();
+    }
+
+    @Override
+    public List<Foods> comidas() {
+        return foodsBean.comidas();
     }
 }
